@@ -23,24 +23,27 @@ h = 60e-10:1e-10:(400*1e-10);
 e_c = zeros(size(h));
 d_su = e_c;
 d_sd = e_c;
+d = e_c;
 for i=1:size(h,2)
     e_c(i) = CriticalStrain(h(i));
     d_su(i) = 2*sqrt(3)*e_c(i)*Ef*h(i)/Ys;
     d_sd(i) = sqrt(3)*e_c(i)*Ef*h(i)/Ys;
+    d(i) = 1.337*sqrt(3)*e_c(i)*Ef*h(i)/Ys;
 end
 figure;
-plot(h,1./d_su); hold on;
-plot(h,1./d_sd); % hold off;
+plot(h,1./d_su,'--'); hold on;
+plot(h,1./d_sd,'--'); hold on;
+plot(h,1./d); hold off;
 
-d_fit = 1.416e-3./h;
-plot(h,d_fit,'--');
-
-plot(80e-10,0.3e6,'*');
-plot(120e-10,0.15e6,'*');
-plot(160e-10,0.16e6,'o');
-plot(160e-10,0.088e6,'*');
-plot(240e-10,0.06e6,'*');
-plot(320e-10,0.044e6,'*');
+% d_fit = 1.416e-3./h;
+% plot(h,d_fit,'--');
+% 
+% plot(80e-10,0.3e6,'*');
+% plot(120e-10,0.15e6,'*');
+% plot(160e-10,0.16e6,'o');
+% plot(160e-10,0.088e6,'*');
+% plot(240e-10,0.06e6,'*');
+% plot(320e-10,0.044e6,'*');
 xlabel('Film Thickness [m]');
 ylabel('Saturation Crack Density [m^{-1}]');
 
